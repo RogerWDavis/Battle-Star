@@ -1,44 +1,96 @@
 # Allows for use of random integers
 from random import randint
 
-# Creates player side of battlestar board
-HIDDEN_BOARD = [[' ']*10 for x in range (10)]
 
-# Creates computer side of battlestar board
-GUESS_BOARD = [[' ']*10 for x in range (10)]
+class BattleBoard:
+    """Creates Board"""
+    def __init__(self, board):
+        self.board = board
 
-# Facilitates letters to numbers conversion
-letters_to_numbers = {'A': 0, 'B': 2, 'C': 3, 'D': 3, 'E': 4, 'F': 5, 'G' : 6, 'H': 7, 'I': 8, 'J': 9}
+    def print_board(self):
+        print('   1 2 3 4 5 6 7 8')
+        print('   ***************')
+        row_num = 1
+        for row in self.board:
+            print("%d|%s|" % (row_num, "|".join(row)))
+            row_num += 1
 
-# Function that uses a set operation for printing the boards
-def  print_board(board):
-    print('A B C D E F G H I J')
-    Print('_ _ _ _ _ _ _ _ _ _')
-    row_number=1
-    for row in board:
-        """formats boards"""
-        print('%d|%s|' % (row_number, '|'.join(row)))
-        row_number += 1
 
-# Function that creates ships
-def create_ships(board):
-    for ship_range(7):
-        ship_row, ship_column = randint(0, 9), randint(0, 9)
-        while board[ship_row][ship_column] = 'x':
-            ship_row, ship_column = randint(0, 9), randint(0, 9)
-        board[ship_row][ship_column] = 'x'
+class DeathStar:
+    """Creates Ships"""
+    def __init__(self, board):
+        self.board = board
 
-# Function that gets ship location
-def get_ship_location():
-    row=input('Please enter a ship row 1-10')
-    while row not in '1 2 3 4 5 6 7 8 9 10':
-        print('Please enter valid row')
-        row=input('Please enter a ship row 1-10')
-    column=input('Please enter valid ship column A-J')
-    while column not in 'A B C D E F G H I J':
-        print('Please enter valid column')
-        column=input('Please enter valid ship column A-J')
-    return int(row), letters_to_numbers[column]
+    def count_hit_ships(self):
+        hits = 0
+        for self.row in self.board:
+            for self.column in self.row:
+                if self.column == 'x':
+                    hits += 1
+        return hits
+
+    def create_ships(self):
+        for i in range(5):
+            self.row, self.column = randint(0, 7), randint(0, 7)
+            while self.board[self.row][self.column] == 'x':
+                self.row, self.column = randint(0, 7), randint(0, 7)
+            self.board[self.row][self.column] = 'x'
+        return self.board
+
+
+def get_user_input():
+    try:
+        row = input('Please enter a row coordinate 1-8: ')
+        while row not in '12345678':
+            row = input('Please enter a valid row 1-8: ')
+
+        column = input('Please enter column coordinate 1-8: ')
+        while column not in '12345678':
+            column = input('Please enter valid column  1-8: ')
+
+        return int(row)-1, int(column)-1
+
+    except ValueError:
+        print("Please enter a number")
+        return get_user_input()
+
+
+def GameLogic():
+    death_star = BattleBoard([[' ']*8 for x in range(8)])
+    sky_walker = BattleBoard([[' ']*8 for x in range(8)])
+    DeathStar.create_ships(death_star)
+    lasers = 10
+    while lasers > 0:
+        print('Welcome to Battle Star!')
+        BattleBoard.print_board(death_star)
+        BattleBoard.print_board(sky_walker)
+        sky_row, sky_column = get_user_input()
+        if sky_walker.board[sky_row][sky_column] == '-':
+            print('You already tried that. Use the Force')
+            sky_row, sky_column = get_user_input()
+        elif sky_walker.board[sky_row][sky_column] == 'x':
+            print('You already tried that. Use the Force')
+        elif death_star.board[sky_row][sky_column] == 'x':
+            print('Hit! The Force is strong with you')
+            sky_walker.board[sky_row][sky_column] = 'x'
+            lasers -= 1
+        else:
+            print('Miss! Try again. Use the Force.')
+            sky_walker.board[sky_row][sky_column] = '-'
+            lasers -= 1
+        if DeathStar.count_hit_ships(sky_walker) == 5:
+            print('Congratulations! You destroyed the Death Star!')
+            break
+        print(f'you have  {lasers} lasers remaining')
+        if lasers == 0:
+            print('Game Over')
+            break
+
+
+if __name__ == '__main__':
+    GameLogic()
+
+
 
 
 
