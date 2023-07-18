@@ -65,6 +65,7 @@ I manually tested the project by doing the following:
 
 * Tested invalid inputs, out of bound inputs and the same input twice
 * Tested the project in my local terminal
+* Tested on Heroku hosting site. You can find the live application [here](https://battlestar-5603f3628e7a.herokuapp.com/)
 
 ## Bugs
 The target creation method was problematic do to incorrect indentation. 
