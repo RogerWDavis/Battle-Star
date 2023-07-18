@@ -1,32 +1,82 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Battle Star!
 
-Welcome,
+Battle Star is a Python terminal game, which runs in the Code Institute mock terminal on Heroku
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+Users have a laser cannon primed with ten charges. With these they must hit the Deathstar's vital points to save the Universe. Each vital point is represented by one square on the board.
 
-## Reminders
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
 
-## Creating the Heroku app
+## How to play
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+Battle Star is based on the classic Battleship game. You can read more on this [here](https://en.wikipedia.org/wiki/Battleship_(game))
 
-1. `heroku/python`
-2. `heroku/nodejs`
+In this version, two boards are randomly generated.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+The player can see a grid of potential targets and is prompted to input the coordinates for the points on the grid that they believe are any weakpoints.
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+Successful hits are represented by an 'x' while misses are represented by a '-'.
 
-Connect your GitHub repository and deploy as normal.
+Five successful strikes and the player wins. Ten misses and they are out of ammunition, resulting in a game over.
 
-## Constraints
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+## Features
 
----
+### Existing Features
 
-Happy coding!
+* Random Board Generation
+ * Targets are populated to the computer's grid at random.
+ * The player cannot see the computer's targets.
+
+![Randomly generated computer targets](assets/images/deathstar.PNG)
+
+* Play against the computer
+* Accepts user inputs
+
+* Input validation and error checking
+ * You cannot enter coordinates outside the size of the grid
+
+![Randomly generated computer targets](assets/images/deathstar3.PNG)
+ 
+ * You must enter numbers
+
+ ![Randomly generated computer targets](assets/images/deathstar1.PNG)
+
+ * You cannot enter the same guess twice
+
+ ![Randomly generated computer targets](assets/images/deathstar2.PNG)
+
+### Future Features
+
+* Allow multiplayer
+* Allow the Empire to strike back
+* Allow players control over target placement
+
+## Data Model
+
+I used a Battleboard class containing the method for define the boards and a Deathstar class containing functions for the creation of targets and the tracking of successful hits.
+
+Functions were defined for recieving inputs and managing game logic.
+
+## Testing
+
+I manually tested the project by doing the following:
+* Passed the code through the PEP8 Linter and confirmed there are no problems
+![Randomly generated computer targets](assets/images/lintertest.PNG)
+
+* Tested invalid inputs, out of bound inputs and the same input twice
+* Tested the project in my local terminal
+
+## Bugs
+The target creation method was problematic do to incorrect indentation. 
+
+## Remaining Bugs
+No remaining Bugs
+
+## Credits
+* Wikipedia for game rules
+* [ArjanCodes](https://www.youtube.com/watch?v=u3yo-TjeIDg) for tips on refactoring
+* [Knowledge Mavens](https://www.youtube.com/@KnowledgeMavens) for tips on converting functions to object oriented code and board creation using list comprehension, set notation and  ".join"
+
+
+
+

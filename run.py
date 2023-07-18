@@ -8,6 +8,7 @@ class BattleBoard:
         self.board = board
 
     def print_board(self):
+        """prints board"""
         print('   1 2 3 4 5 6 7 8')
         print('   ***************')
         row_num = 1
@@ -22,6 +23,7 @@ class DeathStar:
         self.board = board
 
     def count_hit_ships(self):
+        """counts successful guesses"""
         hits = 0
         for self.row in self.board:
             for self.column in self.row:
@@ -30,6 +32,7 @@ class DeathStar:
         return hits
 
     def create_ships(self):
+        """creates computer targets"""
         for i in range(5):
             self.row, self.column = randint(0, 7), randint(0, 7)
             while self.board[self.row][self.column] == 'x':
@@ -39,6 +42,7 @@ class DeathStar:
 
 
 def get_user_input():
+    """gets user inputs"""
     try:
         row = input('Please enter a row coordinate 1-8: ')
         while row not in '12345678':
@@ -54,8 +58,11 @@ def get_user_input():
         print("Please enter a number")
         return get_user_input()
 
+        data_str=input("enter your data here:\n")
+
 
 def GameLogic():
+    """creates game logic"""
     death_star = BattleBoard([[' ']*8 for x in range(8)])
     sky_walker = BattleBoard([[' ']*8 for x in range(8)])
     DeathStar.create_ships(death_star)
@@ -70,6 +77,7 @@ def GameLogic():
             sky_row, sky_column = get_user_input()
         elif sky_walker.board[sky_row][sky_column] == 'x':
             print('You already tried that. Use the Force')
+            sky_row, sky_column = get_user_input()
         elif death_star.board[sky_row][sky_column] == 'x':
             print('Hit! The Force is strong with you')
             sky_walker.board[sky_row][sky_column] = 'x'
