@@ -69,7 +69,6 @@ def GameLogic():
     lasers = 10
     while lasers > 0:
         print('Welcome to Battle Star!')
-        BattleBoard.print_board(death_star)
         BattleBoard.print_board(sky_walker)
         sky_row, sky_column = get_user_input()
         if sky_walker.board[sky_row][sky_column] == '-':

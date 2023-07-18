@@ -4,7 +4,7 @@ Battle Star is a Python terminal game, which runs in the Code Institute mock ter
 
 Users have a laser cannon primed with ten charges. With these they must hit the Deathstar's vital points to save the Universe. Each vital point is represented by one square on the board.
 
-
+![Picture of live program](assets/images/deathstar4.PNG)
 
 ## How to play
 
