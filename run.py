@@ -49,6 +49,32 @@ class Player:
             return self.get_ship_coordinates()
 
 
+"""The GameLogic class defines the two players, calls the place_ships method, handles player turn alternation and tests for game over."""
+class GameLogic:
+    """Creates game logic, assigns players 1&2"""
+    def __init__(self):
+        self.players=[Player('Player 1'), Player('Player 2')] 
+
+
+    def run_game(self):
+        for player in self.players:
+            player.place_ships()
+
+        current_player_index=0
+
+        while True:
+            attacking_player=self.players[current_player_index]
+            target_player=self.players[1-current_player_index]
+            attacking_player.attack(target_player)
+
+            if self.is_game_over():
+                print(f'{attacking_player.name} wins!')
+                break
+
+            current_player_index=1-current_player_index
+
+
+    
 
 
 
