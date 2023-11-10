@@ -1,9 +1,13 @@
-class BattleBoard:
+    
+
 """The BattleBoard class is called to create the player_boards, created and implemented in the GameLogic class"""
+class BattleBoard:
+    """Creates Board"""
     def__init__(self):
         self.board=[['']*8 for_in range(8)]
 
     def print_board(self):
+        """Prints Board"""
         print(' 12345678')
         print(' ********')
         row_num=1
@@ -12,8 +16,9 @@ class BattleBoard:
             row_num +=1
 
 
+"""The Player class handles the manual placement of ships for each player and tests for value errors."""
 class Player:
-    """The Player class handles the manual placement of ships for each player and tests for value errors."""
+    """Creates Player"""
     def __init__(self,name):
         self.name=name
         self.board=BattleBoard()
@@ -28,6 +33,23 @@ class Player:
 
 
     def get_ship_coordinates(self):
-        """Get ship 
+        """Get ship coordinates from player"""
+        try:
+            row=int(input('Enter the row coordinate (1-8): '))-1
+            col=int(input('Enter the column coordinate (1-8): '))-1
+
+            if not (0 <= row < 8) or not (0 <= < 8):
+                print('Invalid coordinates. Try again.')
+                return self.get_ship_coordinates()
+
+            return row, col
+
+        except ValueError:
+            print('Invalid input. Please enter numbers. Try again.')
+            return self.get_ship_coordinates()
+
+
+
+
 
     
