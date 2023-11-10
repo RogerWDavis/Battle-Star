@@ -74,8 +74,10 @@ class GameLogic:
             current_player_index=1-current_player_index
 
 
-    
-
-
+    def is_game_over(self):
+        for player in self.players:
+            if all(cell != 'x' for row in player.board.board for cell in row):
+                return True
+        return False
 
     
