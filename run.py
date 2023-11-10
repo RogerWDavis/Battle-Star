@@ -15,6 +15,11 @@ class BattleBoard:
             print("%d|%s"%(row_num,"|".join(row)))
             row_num +=1
 
+    def hide_ships(self, row):
+        """Hide opponent's ship placement"""
+        return [' ' if cell == 'x'else cell for cell in row]
+
+
 
 """The Player class handles the manual placement of ships for each player and tests for value errors."""
 class Player:
@@ -50,6 +55,32 @@ class Player:
         except ValueError:
             print('Invalid input. Please enter numbers. Try again.')
             return self.get_ship_coordinates()
+
+
+    def attack(self, target_player):
+        """Player attacks target player board"""
+        target_player_board=target_player.board
+        target_player_board.print_board()
+
+        try:
+            row=int(input(f'{self.name}, choose a row to attack (1-8): '))-1
+            col=int(input(f'{self.name}, choose a column to attack (1-8)'))-1
+
+            if not (0 <= row < 8) or not (0 <= col < 8):
+                print('Invalid coordinates. Try again')
+                return self.attack(target_player)
+
+            if target_player_board.board[row][col]=='x':
+                print(f'{self.name} hit the target!')
+                target_player_board.board[row][col]='H'
+
+            else:
+                print('Invalid input. Please enter numbers. Try again.')
+                return self.attack(target_player_board)
+
+        except ValueError:
+            print('Invalid input. Please enter numbers. Try again')
+            return self.attack(target_player)
 
 
 """The GameLogic class defines the two players, calls the place_ships method, handles player turn alternation and tests for game over."""
