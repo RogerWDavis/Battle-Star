@@ -81,3 +81,7 @@ class GameLogic:
         return False
 
     
+
+if __name__=='__main__':
+    game_logic=GameLogic()
+    game_logic.run_game()
