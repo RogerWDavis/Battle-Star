@@ -27,6 +27,7 @@ class Player:
     def __init__(self,name):
         self.name=name
         self.board=BattleBoard()
+        self.attacked_coordinates=set()
 
 
     def place_ships(self):
@@ -79,10 +80,12 @@ class Player:
             if target_player.board.board[row][col]=='x':
                 print(f'{self.name} hit the target!')
                 target_player.board.board[row][col]='H'
-
-            else:
-                print(f'{self.name} hit the target!')
+            elif target_player.board.board[row][col]=='':
+                print(f'{self.name} missed!')
                 target_player.board.board[row][col]='M'
+            else:
+                print('You hit your own ship! Choose a different location.')
+                return self.attack(target_player)
 
         except ValueError:
             print('Invalid input. Please enter numbers. Try again')
