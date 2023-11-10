@@ -3,8 +3,8 @@
 """The BattleBoard class is called to create the player_boards, created and implemented in the GameLogic class"""
 class BattleBoard:
     """Creates Board"""
-    def__init__(self):
-        self.board=[['']*8 for_in range(8)]
+    def __init__(self) :
+        self.board=[['']*8 for _ in range(8)]
 
     def print_board(self):
         """Prints Board"""
@@ -25,11 +25,14 @@ class Player:
 
 
     def place_ships(self):
-        """Alows manual placement of ships"""
+        """Allows manual placement of ships"""
         print(f'{self.name}, place your ships:')
-        for_in range(5):
+        for _ in range(5):
             row, col=self.get_ship_coordinates()
-            while self.board.board[row][col]='x'
+            while self.board.board[row][col]=='x':
+                print('You already placed a ship there. Choose a different location.')
+                row, col=self.get_ship_coordinates()
+            self.board.board[row][col]='x'
 
 
     def get_ship_coordinates(self):
@@ -38,7 +41,7 @@ class Player:
             row=int(input('Enter the row coordinate (1-8): '))-1
             col=int(input('Enter the column coordinate (1-8): '))-1
 
-            if not (0 <= row < 8) or not (0 <= < 8):
+            if not (0 <= row < 8) or not (0 <= col < 8):
                 print('Invalid coordinates. Try again.')
                 return self.get_ship_coordinates()
 
