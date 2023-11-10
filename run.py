@@ -18,4 +18,16 @@ class Player:
         self.name=name
         self.board=BattleBoard()
 
+
+    def place_ships(self):
+        """Alows manual placement of ships"""
+        print(f'{self.name}, place your ships:')
+        for_in range(5):
+            row, col=self.get_ship_coordinates()
+            while self.board.board[row][col]='x'
+
+
+    def get_ship_coordinates(self):
+        """Get ship 
+
     
