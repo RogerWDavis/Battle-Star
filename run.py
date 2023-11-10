@@ -6,13 +6,13 @@ class BattleBoard:
     def __init__(self) :
         self.board=[['']*8 for _ in range(8)]
 
-    def print_board(self):
+    def print_board(self, hide_ships=False):
         """Prints Board"""
         print(' 12345678')
         print(' ********')
         row_num=1
         for row in self.board:
-            print("%d|%s"%(row_num,"|".join(row)))
+            print("%d|%s"%(row_num,"|".join(self.hide_ships(row) if hide_ships else row)))
             row_num +=1
 
     def hide_ships(self, row):
@@ -60,7 +60,7 @@ class Player:
     def attack(self, target_player):
         """Player attacks target player board"""
         target_player_board=target_player.board
-        target_player_board.print_board()
+        target_player_board.print_board(hide_ships=True)
 
         try:
             row=int(input(f'{self.name}, choose a row to attack (1-8): '))-1
@@ -70,13 +70,13 @@ class Player:
                 print('Invalid coordinates. Try again')
                 return self.attack(target_player)
 
-            if target_player_board.board[row][col]=='x':
+            if target_player.board.board[row][col]=='x':
                 print(f'{self.name} hit the target!')
-                target_player_board.board[row][col]='H'
+                target_player.board.board[row][col]='H'
 
             else:
-                print('Invalid input. Please enter numbers. Try again.')
-                return self.attack(target_player_board)
+                print(f'{self.name} hit the target!')
+                target_player.board.board[row][col]=M
 
         except ValueError:
             print('Invalid input. Please enter numbers. Try again')
