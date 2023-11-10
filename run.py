@@ -17,7 +17,7 @@ class BattleBoard:
 
     def hide_ships(self, row):
         """Hide opponent's ship placement"""
-        return [' ' if cell == 'x'else cell for cell in row]
+        return ['' if cell == 'x'else cell for cell in row]
 
 
 
@@ -64,11 +64,17 @@ class Player:
 
         try:
             row=int(input(f'{self.name}, choose a row to attack (1-8): '))-1
-            col=int(input(f'{self.name}, choose a column to attack (1-8)'))-1
+            col=int(input(f'{self.name}, choose a column to attack (1-8): '))-1
 
             if not (0 <= row < 8) or not (0 <= col < 8):
                 print('Invalid coordinates. Try again')
                 return self.attack(target_player)
+
+            if (row, col) in self.attacked_coordinates:
+                print('You have already attacked these coordinates. Choose a different location.')
+                return self.attack(target_player)
+
+            self.attacked_coordinates.add((row,col))
 
             if target_player.board.board[row][col]=='x':
                 print(f'{self.name} hit the target!')
@@ -76,7 +82,7 @@ class Player:
 
             else:
                 print(f'{self.name} hit the target!')
-                target_player.board.board[row][col]=M
+                target_player.board.board[row][col]='M'
 
         except ValueError:
             print('Invalid input. Please enter numbers. Try again')
